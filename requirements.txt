@@ -1,0 +1,6 @@
+pyyaml
+flask
+gevent
+requests
+pygithub
+git+https://github.com/TwitchPlaysPokemon/pokecat.git
