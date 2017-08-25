@@ -3,6 +3,7 @@ Server-code for the github webhooks.
 """
 import logging
 
+import gevent
 from flask import Flask, request
 from github import Github
 from github.Repository import Repository
@@ -29,6 +30,10 @@ class WebApp(Flask):
         data = request.json
         logger.info("webhook invoked, received payload: %s", data)
         commit_sha = data["head_commit"]["id"]
+        gevent.spawn(self.analyze_commit, commit_sha)
+        return ""
+
+    def analyze_commit(self, commit_sha):
         commit = self.repo.get_commit(commit_sha)
         link = self.repo.get_archive_link("tarball", commit.sha)
         with TemporaryRepository(tarball_url=link) as repository:
@@ -36,4 +41,3 @@ class WebApp(Flask):
             # filter out low priority notes
             notes = [n for n in notes if n.severity != Severity.NOTE]
             commit.create_comment("```{}```".format("\n".join(map(str, notes))))
-        return ""
