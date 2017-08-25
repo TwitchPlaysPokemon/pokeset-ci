@@ -1,6 +1,6 @@
 # Have a file called config.yml override these values
 
-# oauth token for the github account being used. needs scoped for hooks and stuff.
+# oauth token for the github account being used. needs scoped for creating hooks and commenting on commits.
 oauth_token:
 
 # locate the repository by owner and name. for example Felk/pokeset-ci or TwitchPlaysPokemon/pokecat

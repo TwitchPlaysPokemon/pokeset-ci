@@ -1,13 +1,24 @@
 """
 Runs the pokeset ci server.
 """
+import logging
 import os
+import sys
+import time
 
 import yaml
 
 from pokesetci import PokesetCi, Config
 
 BASE_PATH = os.path.dirname(__file__)
+
+logging.Formatter.converter = time.gmtime
+logging.basicConfig(
+    stream=sys.stdout,
+    level=logging.INFO,
+    format="[%(asctime)s.%(msecs)03d]\t[%(levelname)s]\t[%(name)s]\t%(message)s",
+    datefmt="%Y-%m-%d %H:%M:%S"
+)
 
 
 def load_config() -> Config:
