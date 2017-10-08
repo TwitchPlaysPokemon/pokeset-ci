@@ -40,4 +40,5 @@ class WebApp(Flask):
             notes, pokesets = analyze_dir(repository)
             # filter out low priority notes
             notes = [n for n in notes if n.severity != Severity.NOTE]
-            commit.create_comment("```{}```".format("\n".join(map(str, notes))))
+            # newline after start of code block, because text there otherwise gets interpreted as language name
+            commit.create_comment("```\n{}```".format("\n".join(map(str, notes))))
