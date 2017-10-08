@@ -141,8 +141,8 @@ def analyze_all_pokesets_integrity(original_pokesets):
         if None in genders_this_species and len(genders_this_species) > 1:
             notes.append(Note(
                 Severity.ERROR,
-                ("Starting with this set, that species now has both genderless and genderful sets! "
-                 "Stick to either genderless or genderful per species or PBR might crash!"),
+                ("Starting with this set, that species now has both genderless and gendered sets! "
+                 "Stick to either genderless or gendered per species or PBR might crash!"),
                 identifier
             ))
         if identifier in existing_ids:
