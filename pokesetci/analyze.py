@@ -70,11 +70,16 @@ def analyze_file(file_obj):
     notes = []
     try:
         raw_pokesets = list(yaml.load_all(file_obj))
-    except yaml.scanner.ScannerError as e:
+    except yaml.MarkedYAMLError as e:
         notes.append(Note(
             Severity.ERROR,
             str(e),
             position=e.problem_mark.line,
+        ))
+    except yaml.YAMLError as e:
+        notes.append(Note(
+            Severity.ERROR,
+            str(e),
         ))
     else:
         for raw_pokeset in raw_pokesets:
