@@ -119,14 +119,8 @@ def analyze_pokeset(pokeset):
         else:
             for warning in w:
                 warning_message = str(warning.message)
-                if ("(wasted points)" in warning_message
-                    or "Sum of EV must not be larger than 510" in warning_message
-                    or "didn't recognize ball poke" in warning_message.lower()):  # TODO
-                    severity = Severity.NOTE
-                else:
-                    severity = Severity.WARNING
                 notes.append(Note(
-                    severity,
+                    Severity.WARNING,
                     warning_message,
                     identifier
                 ))
